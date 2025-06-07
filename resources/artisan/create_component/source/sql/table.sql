@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `[[component_name]]` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `content_cat_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brief` longtext COLLATE utf8mb4_unicode_ci,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `title_en` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brief_en` longtext COLLATE utf8mb4_unicode_ci,
+  `content_en` longtext COLLATE utf8mb4_unicode_ci,
+  `active` smallint(6) NOT NULL DEFAULT '0',
+  `expire_at` datetime DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `contents_content_cat_id_foreign` (`content_cat_id`),
+  KEY `contents_user_id_foreign` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
