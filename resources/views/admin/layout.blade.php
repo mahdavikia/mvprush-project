@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>DGT DashView 1.0</title>
+    <title>MVP Rush Panel</title>
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('') }}assets/vendors/core/core.css">
@@ -36,7 +36,7 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <a href="{{route('admin.versions.index')}}" class="sidebar-brand">
-                Dash<strong>View</strong>
+                MVP<strong>Rush</strong>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
