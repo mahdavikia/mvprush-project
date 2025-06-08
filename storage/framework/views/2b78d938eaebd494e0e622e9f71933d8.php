@@ -10,22 +10,22 @@
     <title>ورود به ناحیه مدیریت</title>
 
     <!-- core:css -->
-    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/core/core.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/vendors/core/core.css">
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('') }}assets/fonts/feather-font/css/iconfont.css">
-    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/fonts/feather-font/css/iconfont.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/vendors/flag-icon-css/css/flag-icon.min.css">
     <!-- endinject -->
 
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('') }}assets/css/demo1/style-rtl.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/css/demo1/style-rtl.min.css">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{ asset('') }}assets/images/favicon.png" />
+    <link rel="shortcut icon" href="<?php echo e(asset('')); ?>assets/images/favicon.png" />
 </head>
 
 <body>
@@ -35,34 +35,36 @@
 
                 <div class="row w-100 mx-0 auth-page">
 
-                    @if($message = Session::get('error') || $message = Session::get('success'))
+                    <?php if($message = Session::get('error') || $message = Session::get('success')): ?>
                         <div class="row">
                             <div class="col-md-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        @if ($message = Session::get('error'))
+                                        <?php if($message = Session::get('error')): ?>
                                             <div class="note note-danger">
                                                 <strong>خطا!</strong>
                                                 <br>
-                                                {{ $message }}
+                                                <?php echo e($message); ?>
+
                                             </div>
-                                        @endif
-                                        @if ($message = Session::get('success'))
+                                        <?php endif; ?>
+                                        <?php if($message = Session::get('success')): ?>
                                             <div class="note note-success">
-                                                {{ $message }}
+                                                <?php echo e($message); ?>
+
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
                     <div class="col-md-8 col-xl-6 mx-auto">
 
-                        <form class="login-form" action="{{ route('admin.login.post') }}" method="post">
-                            @csrf
-                            @method('POST')
+                        <form class="login-form" action="<?php echo e(route('admin.login.post')); ?>" method="post">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('POST'); ?>
 
                         <div class="card">
                             <div class="row">
@@ -76,21 +78,22 @@
                                         <a href="#" class="noble-ui-logo d-block mb-2">MVP<span>Rush</span></a>
                                         <h5 class="text-muted fw-normal mb-4">ناحیه مدیریت
                                         </h5>
-                                        @if ($errors->any())
+                                        <?php if($errors->any()): ?>
                                             <div class="alert alert-warning">
                                                 <p class="mb-5"><span class="font-bold">خطا !</span><span> لطفا موارد زیر را بصورت صحیح تکمیل فرمایید.</span></p>
                                                 <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>- {{ $error }}</li>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <li>- <?php echo e($error); ?></li>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </ul>
                                             </div>
-                                        @endif
-                                        @if(isset($error_message)  && !is_null($error_message))
+                                        <?php endif; ?>
+                                        <?php if(isset($error_message)  && !is_null($error_message)): ?>
                                             <div class="alert alert-danger">
-                                                {{$error_message}}
+                                                <?php echo e($error_message); ?>
+
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
                                         <form class="forms-sample">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">نام کاربری</label>
@@ -102,30 +105,30 @@
                                                 <input type="password" class="form-control" style="text-align: left;direction: ltr;" name="password" id="password"
                                                        autocomplete="current-password" placeholder="رمز عبور">
                                             </div>
-{{--                                            <div class="mb-3">--}}
-{{--                                                <label for="password" class="form-label">تیم</label>--}}
-{{--                                                <select class="form-control form-select" name="team_id" id="team_id">--}}
-{{--                                                    @foreach($teams as $team)--}}
-{{--                                                        <option value="{{$team->id}}">{{$team->name}}</option>--}}
-{{--                                                    @endforeach--}}
-{{--                                                </select>--}}
-{{--                                            </div>--}}
 
-{{--                                            <div class="form-group">--}}
-{{--                                                <div class="col-lg-6 col-md-12 col-12 captcha" style="cursor: pointer">--}}
-{{--                                                    <span>{!! captcha_img('math') !!}</span>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="form-group">--}}
-{{--                                                <label class="control-label visible-ie8 visible-ie9">پاسخ عبارت :--}}
-{{--                                                [<a href="javascript:void(0)" style="margin-right: 5px;" id="reload">عبارت جدید</a>]--}}
-{{--                                                </label>--}}
-{{--                                                <div class="input-icon">--}}
-{{--                                                    <i class="fa fa-lock"></i>--}}
-{{--                                                    <input class="form-control placeholder-no-fix left @error('captcha') has-error @enderror" type="text" autocomplete="off"  style="text-align: left;direction: ltr;" placeholder="پاسخ عبارت" name="captcha"/>--}}
 
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                             <div class="form-group mt-2">
                                                 <button type="submit"
@@ -147,15 +150,15 @@
     </div>
 </div>
 <!-- core:js -->
-<script src="{{ asset('') }}assets/vendors/core/core.js"></script>
+<script src="<?php echo e(asset('')); ?>assets/vendors/core/core.js"></script>
 <!-- endinject -->
 
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 
 <!-- inject:js -->
-<script src="{{ asset('') }}assets/vendors/feather-icons/feather.min.js"></script>
-{{--<script src="{{ asset('') }}assets/js/template.js"></script>--}}
+<script src="<?php echo e(asset('')); ?>assets/vendors/feather-icons/feather.min.js"></script>
+
 <!-- endinject -->
 <script type="text/javascript">
    $('#reload').click(function () {
@@ -175,3 +178,4 @@
 </body>
 
 </html>
+<?php /**PATH F:\wamp64_new\www\mvprush\_git\resources\views/admin/login.blade.php ENDPATH**/ ?>
