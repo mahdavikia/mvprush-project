@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Docker image
         run: docker build -t laravel-app:develop .
@@ -20,7 +20,7 @@ jobs:
         run: docker save laravel-app:develop -o laravel-app-develop.tar
 
       - name: Upload Docker image as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: laravel-app-develop-image
           path: laravel-app-develop.tar
