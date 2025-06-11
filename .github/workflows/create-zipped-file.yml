@@ -1,0 +1,25 @@
+name: Zip Laravel Files and Upload
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  zip-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ZIP archive
+        run: |
+          mkdir export
+          zip -r export/laravel-files.zip app routes resources public
+
+      - name: Upload as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: laravel-zipped-files
+          path: export/laravel-files.zip
