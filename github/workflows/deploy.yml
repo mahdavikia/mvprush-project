@@ -23,7 +23,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "."
-        target: "/home/ubuntu/laravel-app"
+        target: "/home/mahdavikia/Downloads/mvprush-project"
 
     - name: SSH and deploy on server
       uses: appleboy/ssh-action@v1.0.0
@@ -32,6 +32,6 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
-          cd /home/ubuntu/laravel-app
+          cd /home/mahdavikia/Downloads/mvprush-project
           docker-compose down
           docker-compose up -d --build
