@@ -1,0 +1,26 @@
+name: Build Docker Image and Save as Artifact
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t laravel-app:develop .
+
+      - name: Save Docker image to tar
+        run: docker save laravel-app:develop -o laravel-app-develop.tar
+
+      - name: Upload Docker image as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: laravel-app-develop-image
+          path: laravel-app-develop.tar
